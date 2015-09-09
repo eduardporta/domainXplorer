@@ -3,7 +3,7 @@ use strict;
 use warnings;
 
 unless ($ARGV[4]) {
-	die "USAGE: domainXplorer.pl [DIRECTORY WITH THE AUXILIARY SCRIPTS] [NAME OUTPUT FILES] [FILE WITH MUTATIONS] [FILE WITH SCORES] [FILE WITH FEATURES] [-optional:FLAG TO CORRECT BY BATCH (0 = CORRECT | 1 = DO NOT CORRECT)]\n";
+	die "USAGE: domainXplorer.pl [DIRECTORY WITH THE AUXILIARY SCRIPTS] [NAME OUTPUT FILES] [FILE WITH MUTATIONS] [FILE WITH SCORES] [FILE WITH PROTEIN REGIONS] [-optional:FLAG TO CORRECT BY BATCH (0 = CORRECT | 1 = DO NOT CORRECT)]\n";
 }
 
 my ($dir_scripts, $analysis_name, $file_mutations, $file_scores, $file_features, $flag_batch) = @ARGV;
