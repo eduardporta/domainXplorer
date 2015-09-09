@@ -1,0 +1,40 @@
+This directory contains domainXplorer, an algorithm to identify correlations between
+phenotypes and mutations in protein regions, including domains and disordered regions.
+
+In order to run domainXplorer you will need R and Perl as well as the following 
+tab-separated files:
+
+1 - File with mutations, it should have the following columns:
+	
+	a) Name of the sample
+	b) Name of the protein
+	c) Position of the mutation
+	
+2 - File with the phenotype annotations, it should have the following columns:
+	
+	a) Name of the sample (it should be the same as in the file with mutation data)
+	b) Batch (optional, just add a dummy here if you do not want to take this into
+	account)
+	c) Phenotype. Ideally this should be a continuous variable that quantifies some
+	phenotype. We provide an example file with ESTIMATE immune scores
+
+3 - File with the domain annotations with this format:
+
+	a) Name of the protein (it should be the same as in the file with mutation data)
+	b..n) Protein regions annotated as NNNN-S-E, where NNNN is the name of the region,
+	S is the start position of the region and E is the end position of the region. For
+	example if there is a kinase domain (PF00069) between positions 7 and 246 it should
+	be in the file as PF00069-7-246
+
+You will also need a directory to store the files and root name for the output.
+
+For example, to reproduce the domainXplorer analysis of ESTIMATE immune annotations of 
+TCGA samples in a directory called "immmune_domains" with the root name "tumor_immunology"
+use this command:
+
+perl domainXplorer immune_domains/ tumor_immunology missense_mutations_TCGA.txt ESTIMATE_scores.txt protein_regions.txt 0
+
+You can find all the necessary files in the folder "example_files". There are three types
+of protein regions in the "protein_regions.txt" file: PFAM domains, annotated with
+PFAMscan, disordered regions, annotated with Foldindex, and putative new protein domains,
+identified with the AIDA server from Adam Godzik's laboratory.
