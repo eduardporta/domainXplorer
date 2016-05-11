@@ -27,17 +27,17 @@ for (t in tissues) {
 
 acc.surv <- survfit (Surv (Time, Status) ~ Group, data = subset (sub.clean, Tissue == "acc"))
 acc.surv.frame <- createSurvivalFrame (acc.surv)
-acc.surv.frame$strata <- factor (acc.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", "75% < Q"))
+acc.surv.frame$strata <- factor (acc.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", "Q > 75%"))
 acc.plot <- ggplot(data = acc.surv.frame, aes(colour = strata, group = strata)) + geom_step(aes(x = time, y = surv), direction = "hv") + geom_point(data = subset(acc.surv.frame, n.censor == 1), aes(x = time, y = surv), shape = 20) + theme(legend.position = "none", axis.text = element_text (color = "black"), panel.background = element_blank(), axis.line = element_line (color = "black"), axis.ticks = element_line (color = "black")) + xlab ("\nTime (days)") + scale_color_manual (values = c ("black", "red"), guide_legend (title = "Immune infiltrate quantile")) + ylab ("Survival\n") + ggtitle ("Adrenal") + scale_y_continuous(labels = percent, limits = c (0,1))
 
 skcm.surv <- survfit (Surv (Time, Status) ~ Group, data = subset (sub.clean, Tissue == "skcm"))
 skcm.surv.frame <- createSurvivalFrame (skcm.surv)
-skcm.surv.frame$strata <- factor (skcm.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", "75% < Q"))
+skcm.surv.frame$strata <- factor (skcm.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", " Q > 75%"))
 skcm.plot <- ggplot(data = skcm.surv.frame, aes(colour = strata, group = strata)) + geom_step(aes(x = time, y = surv), direction = "hv") + geom_point(data = subset(skcm.surv.frame, n.censor == 1), aes(x = time, y = surv), shape = 20) + theme(legend.position = "none", axis.text = element_text (color = "black"), panel.background = element_blank(), axis.line = element_line (color = "black"), axis.ticks = element_line (color = "black")) + xlab ("\nTime (days)") + scale_color_manual (values = c ("black", "red"), guide_legend (title = "Immune infiltrate quantile")) + ylab ("Survival\n") + ggtitle ("Melanoma") + scale_y_continuous(labels = percent, limits = c (0,1))
 
 hnsc.surv <- survfit (Surv (Time, Status) ~ Group, data = subset (sub.clean, Tissue == "hnsc"))
 hnsc.surv.frame <- createSurvivalFrame (hnsc.surv)
-hnsc.surv.frame$strata <- factor (hnsc.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", "75% < Q"))
+hnsc.surv.frame$strata <- factor (hnsc.surv.frame$strata, levels = c ("Group=Low", "Group=High"), labels = c ("Q < 75%", "Q > 75%"))
 hnsc.plot <- ggplot(data = hnsc.surv.frame, aes(colour = strata, group = strata)) + geom_step(aes(x = time, y = surv), direction = "hv") + geom_point(data = subset(hnsc.surv.frame, n.censor == 1), aes(x = time, y = surv), shape = 20) + theme(legend.position = "none", axis.text = element_text (color = "black"), panel.background = element_blank(), axis.line = element_line (color = "black"), axis.ticks = element_line (color = "black")) + xlab ("\nTime (days)") + scale_color_manual (values = c ("black", "red"), guide_legend (title = "Immune infiltrate quantile")) + ylab ("Survival\n") + ggtitle ("Head and neck") + scale_y_continuous(labels = percent, limits = c (0,1))
 
 g_legend<-function(a.gplot){
